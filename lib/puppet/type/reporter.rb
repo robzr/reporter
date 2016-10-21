@@ -9,41 +9,41 @@ Puppet::Type.newtype(:reporter) do
   EOF
 
   newparam(:name, :namevar => true) do
-    desc "The name of the reporter."
+    desc 'The name of the reporter, if used alone is parsed as a fact.'
   end
 
   newparam(:echoonly, :boolean => true, :parent => Puppet::Parameter::Boolean) do
-    desc "When set, will echo output but not log or record a change."
+    desc 'When set, will print to STDOUT but not log or record a change.'
     defaultto false
   end
 
   newparam(:exec) do
-    desc "Command to execute, output is reported."
+    desc 'Executes command, uses output. String for shell parsing, array to bypass.'
     newvalues(/^.*$/)
   end
 
   newparam(:fact) do
-    desc "Fact to report."
+    desc 'Specifies a fact to report.'
     validate { |fact| provider.fact_or_die? fact }
   end
 
   newparam(:format) do
-    desc "Sprintf format to use for output."
+    desc 'Sprintf format to use for output - defaults to "%s" (output only).'
     defaultto 'Format: %s'
   end
 
   newparam(:logonly, :boolean => true, :parent => Puppet::Parameter::Boolean) do
-    desc "When set, will log output but not record a change."
+    desc 'When set, will log output but not record a change.'
     defaultto false
   end
 
   newparam(:message) do
-    desc "Static message."
+    desc 'Static message, will be parsed by Puppet.'
     newvalues(/^.*$/)
   end
 
   newparam(:ruby) do
-    desc "Ruby command(s), return value is reported."
+    desc 'Ruby command(s), return value is reported.'
     newvalues(/^.*$/)
   end
 
@@ -66,7 +66,7 @@ Puppet::Type.newtype(:reporter) do
 
 
   newproperty(:output) do
-    desc "Output to report."
+    desc 'String or text to log, report or echo.'
 
     def retrieve
       :absent
@@ -90,7 +90,7 @@ Puppet::Type.newtype(:reporter) do
       end
     end
 
-    defaultto { 
+    defaultto {
       if @resource[:format]
         @resource[:format] % provider.output
       else

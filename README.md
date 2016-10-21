@@ -13,7 +13,7 @@
 
 ## Description
 
-This module provides a simplified interface for recording & extracting of facts, 
+This module provides a simplified interface for recording & extracting of facts,
 static strings, system commands and ruby commands via Puppet reporting.
 
 Creates a new resource type, Reporter, which can be used to run arbitrary
@@ -39,10 +39,10 @@ files, or use the soon-to-be included reporter utility.
 
 ## Usage
 
-After installing the reporter modules, you simply declare some reporter 
+After installing the reporter modules, you simply declare some reporter
 resources, like:
 ```
-reporter { 
+reporter {
   'passwd_sum':
     exec    => 'sum /etc/passwd';
   'ruby_version':
@@ -61,20 +61,20 @@ reporter {
 ## Reference
 
 Reporter provides a single resource type, which will be resolved on the agent,
-with the output reported (by default) to the Puppet log and into the Puppet 
+with the output reported (by default) to the Puppet log and into the Puppet
 report file for later extraction.
 
 The default behavior registers a change for easy retrieval from a Puppet report
 file via the resource.events.desired_value property.  This can be modified
 by using the logonly paramter (which does not register a change, but does
-log to the output), or via echoonly, which bypasses Puppet completely by 
+log to the output), or via echoonly, which bypasses Puppet completely by
 outputting directly to STDOUT.  The Puppet log level can be altered with the
 loglevel meta-parameter, in order to suppress output in normal runs.
 
 A reporter resource is interpeted in one of four ways - as a Puppet parsed static
 message, fact, shell command or ruby command.  These can be specified by using
 one of the parameters exec, fact, message, or ruby.  The type parameter can
-also be used to explicitely label the type.  If no type or parameter is 
+also be used to explicitely label the type.  If no type or parameter is
 used, the default is to interpret the resource name as a fact.  The default
 behavior or reporter is to record a change, which is how the output is recorded.
 

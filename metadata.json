@@ -1,6 +1,6 @@
 {
   "name": "robzr-reporter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Rob Zwissler",
   "license": "MIT",
   "summary": "Simplified recording & extracting of facts, system or ruby commands via Puppet reporting.",
@@ -38,10 +38,6 @@
       "operatingsystemrelease": ["8", "10", "12", "14", "16"]
     }
   ],
-  "dependencies": [
-    {
-      "name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"
-    }
-  ],
+  "dependencies": [],
   "data_provider": null
 }

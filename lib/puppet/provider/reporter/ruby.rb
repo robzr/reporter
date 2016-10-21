@@ -4,12 +4,14 @@
 Puppet::Type.type(:reporter).provide(:ruby) do
   require 'pp'
 
+  desc 'Universal provider, should work across all POSIX systems.'
+
   @types = [:exec, :fact, :message, :ruby]
 
   def fact_or_die?(fact)
     if is_fact? fact
       true
-    else 
+    else
       raise Puppet::Error, "fact \"#{fact}\" is not a valid fact"
     end
   end
@@ -50,7 +52,7 @@ Puppet::Type.type(:reporter).provide(:ruby) do
   def type
     target_and_type[1]
   end
-  
+
   def target_and_type
     if resource[:type]
       target = resource[resource[:type].to_sym] || resource[:name]
