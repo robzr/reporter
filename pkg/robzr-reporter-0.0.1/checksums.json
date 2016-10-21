@@ -1,0 +1,13 @@
+{
+  "README.md": "ab47a7fd90002ddac03f0b499c056632",
+  "lib/puppet/provider/reporter/ruby.rb": "21ee92b2f2d0faaabc94ec551088cfe8",
+  "lib/puppet/type/reporter.rb": "9931676bb2bec48cfd166ae182cd7e6a",
+  "manifests/init.pp": "c94e62db53825b8e642746d0e9f1194d",
+  "metadata.json": "f52cb65b77deab3fd38018cfcfdcc5c6",
+  "template/Gemfile": "36c376f27539ded2a321b2bd432e843b",
+  "template/Rakefile": "f4692851f7e9afcdb02721319e3f18b9",
+  "template/examples/init.pp": "e433d9edb456f37aa553954f2be6ffa8",
+  "template/manifests/init.pp": "120db5ed824ee865116917fb30e0b729",
+  "template/spec/classes/init_spec.rb": "4fe17f7463b7dc38aa9a90934e69ffa2",
+  "template/spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc"
+}
