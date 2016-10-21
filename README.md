@@ -39,23 +39,23 @@ files, or use the soon-to-be included reporter utility.
 
 ## Usage
 
-After installing the reporter modules, you simply declare some Reporter 
+After installing the reporter modules, you simply declare some reporter 
 resources, like:
 ```
-  reporter { 
-    'passwd_sum':
-      exec    => 'sum /etc/passwd';
-    'ruby_version':
-      format  => 'Ruby version is: %s',
-      ruby    => 'RUBY_VERSION';
-    'puppet_version':
-      logonly => true,
-      fact    => 'puppetversion';
-    'static_message':
-      echoonly => true,
-      message  => 'Echo a static message';
-    'processorcount': ;
-  }
+reporter { 
+  'passwd_sum':
+    exec    => 'sum /etc/passwd';
+  'ruby_version':
+    format  => 'Ruby version is: %s',
+    ruby    => 'RUBY_VERSION';
+  'puppet_version':
+    logonly => true,
+    fact    => 'puppetversion';
+  'static_message':
+    echoonly => true,
+    message  => 'Echo a static message';
+  'processorcount': ;
+}
 ```
 
 ## Reference
@@ -96,39 +96,39 @@ A few additional parameters are supplied in order to alter the behavior:
 
 ## Examples
 ```
-  # Records facts (default behavior with no type specified)
-  reporter {
-    ['operatingsystem', 'osfamily', 'puppetversion', 'swapfree']: ;
-  }
+# Records facts (default behavior with no type specified)
+reporter {
+  ['operatingsystem', 'osfamily', 'puppetversion', 'swapfree']: ;
+}
 
-  # Quietly records a directory listing from /etc
-  reporter {
-    'ls_etc':
-      loglevel => info,
-      exec => 'ls -l /etc';
-  }
+# Quietly records a directory listing from /etc
+reporter {
+  'ls_etc':
+    loglevel => info,
+    exec => 'ls -l /etc';
+}
 
-  # Using Puppet's built in string parsing with a static message
-  reporter {
-    'apache_vhostdir':
-      message => "Directory: ${apache::params::vhostdir}";
-  }
+# Using Puppet's built in string parsing with a static message
+reporter {
+  'apache_vhostdir':
+    message => "Directory: ${apache::params::vhostdir}";
+}
 
-  # Bypass puppet reporting and logging
-  reporter {
-    'dont_run':
-      echoonly => true,
-      message  => 'You should not be running this module!!!';
-  }
+# Bypass puppet reporting and logging
+reporter {
+  'dont_run':
+    echoonly => true,
+    message  => 'You should not be running this module!!!';
+}
 
-  # Print output from a command as a warning log entry
-  reporter {
-    'previous_login':
-      format => '%s logged in before you.',
-      loglevel => warning,
-      logonly => true,
-      exec  => 'last | head -2 | tail -1 | cut -f1 -d\ ';
-  }
+# Print output from a command as a warning log entry
+reporter {
+  'previous_login':
+    format => '%s logged in before you.',
+    loglevel => warning,
+    logonly => true,
+    exec  => 'last | head -2 | tail -1 | cut -f1 -d\ ';
+}
 ```
 
 ## Limitations
