@@ -20,7 +20,7 @@ Creates a new resource type, Reporter, which can be used to run arbitrary
 shell or Ruby commands, facts, or static strings, which are then recorded in
 the native Puppet report, and can be extracted by the (soon to be included)
 reporter script, which allows for simple scanning for changes across time,
-aggregateing output for multiple hosts, or querying hosts.
+aggregating output for multiple hosts, or querying hosts.
 
 ## Setup
 
@@ -66,15 +66,15 @@ report file for later extraction.
 
 The default behavior registers a change for easy retrieval from a Puppet report
 file via the resource.events.desired_value property.  This can be modified
-by using the logonly paramter (which does not register a change, but does
+by using the logonly parameter (which does not register a change, but does
 log to the output), or via echoonly, which bypasses Puppet completely by
 outputting directly to STDOUT.  The Puppet log level can be altered with the
 loglevel meta-parameter, in order to suppress output in normal runs.
 
-A reporter resource is interpeted in one of four ways - as a Puppet parsed static
+A reporter resource is interpreted in one of four ways - as a Puppet parsed static
 message, fact, shell command or ruby command.  These can be specified by using
 one of the parameters exec, fact, message, or ruby.  The type parameter can
-also be used to explicitely label the type.  If no type or parameter is
+also be used to explicitly label the type.  If no type or parameter is
 used, the default is to interpret the resource name as a fact.  The default
 behavior or reporter is to record a change, which is how the output is recorded.
 
@@ -147,6 +147,6 @@ Contact me [via GitHub](https://github.com/robzr/reporter/issues) with requests,
 ### TODO
 
 - Add ruby script and module for parsing Puppet report files to extract reports
-- Create a source parameter to serve executible files
+- Create a source parameter to serve executable files
 - Look into resource collectors for more sophisticated installation
 - Test & document using with notify/subscribe to chain events
