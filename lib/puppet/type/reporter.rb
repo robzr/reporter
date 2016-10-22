@@ -1,5 +1,4 @@
-#
-# See https://docs.puppet.com/guides/custom_types.html
+# Ref: https://docs.puppet.com/guides/custom_types.html
 #
 Puppet::Type.newtype(:reporter) do
   require 'pp'
@@ -19,7 +18,7 @@ Puppet::Type.newtype(:reporter) do
 
   newparam(:exec) do
     desc 'Executes command, uses output. String for shell parsing, array to bypass.'
-    newvalues(/^.*$/)
+    newvalues(/^.+$/)
   end
 
   newparam(:fact) do
@@ -29,25 +28,25 @@ Puppet::Type.newtype(:reporter) do
 
   newparam(:format) do
     desc 'Sprintf format to use for output - defaults to "%s" (output only).'
-    defaultto 'Format: %s'
+    defaultto '%s'
   end
 
   newparam(:logonly, :boolean => true, :parent => Puppet::Parameter::Boolean) do
-    desc 'When set, will log output but not record a change.'
+    desc 'When set, will log output but not record as a change.'
     defaultto false
   end
 
   newparam(:message) do
     desc 'Static message, will be parsed by Puppet.'
-    newvalues(/^.*$/)
+    newvalues(/^.+$/)
   end
 
   newparam(:ruby) do
     desc 'Ruby command(s), return value is reported.'
-    newvalues(/^.*$/)
+    newvalues(/^.+$/)
   end
 
-  # TODO: make this work
+  # TODO: add filebucket/script functionality
 #  newparam(:source) do
 #    desc "Provide a script to run"
 #  end
@@ -59,11 +58,9 @@ Puppet::Type.newtype(:reporter) do
 
   newparam(:withpath) do
     desc "Whether to show the full object path. Defaults to false."
-    defaultto :false
-
     newvalues(:true, :false)
+    defaultto :false
   end
-
 
   newproperty(:output) do
     desc 'String or text to log, report or echo.'
@@ -72,7 +69,6 @@ Puppet::Type.newtype(:reporter) do
       :absent
     end
 
-    # Determines if it is considered a "change" or not
     def insync?(is)
       if @resource[:echoonly]
         puts @resource[:output]
@@ -90,12 +86,6 @@ Puppet::Type.newtype(:reporter) do
       end
     end
 
-    defaultto {
-      if @resource[:format]
-        @resource[:format] % provider.output
-      else
-        provider.output
-      end
-    }
+    defaultto { (@resource[:format] || '%s') % provider.output }
   end
 end

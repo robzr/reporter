@@ -1,5 +1,4 @@
-#
-# https://docs.puppet.com/guides/provider_development.html
+# Ref: https://docs.puppet.com/guides/provider_development.html
 #
 Puppet::Type.type(:reporter).provide(:ruby) do
   require 'pp'
@@ -45,35 +44,6 @@ Puppet::Type.type(:reporter).provide(:ruby) do
     nil
   end
 
-  def target
-    target_and_type[0]
-  end
-
-  def type
-    target_and_type[1]
-  end
-
-  def target_and_type
-    if resource[:type]
-      target = resource[resource[:type].to_sym] || resource[:name]
-      unless is_type? resource[:type] && target
-        raise Puppet::Error, "fact \"#{fact}\" is not a valid fact"
-      end
-      [resource[resource[:type].to_sym], resource[:type].to_sym]
-    else
-      if resource[:exec]
-        [resource[:exec], :exec]
-      elsif resource[:message]
-        [resource[:message], :message]
-      elsif resource[:ruby]
-        [resource[:ruby], :ruby]
-      else
-        fact = resource[:fact] || resource[:name]
-        [fact, :fact] if fact_or_die? fact
-      end
-    end
-  end
-
   def type_or_die?(type)
     unless is_type? type.to_sym
       raise Puppet::Error, "Type must be #{@types.join(', ')}"
@@ -114,4 +84,32 @@ Puppet::Type.type(:reporter).provide(:ruby) do
     @types.include? type.to_sym
   end
 
+  def target
+    target_and_type[0]
+  end
+
+  def type
+    target_and_type[1]
+  end
+
+  def target_and_type
+    if resource[:type]
+      target = resource[resource[:type].to_sym] || resource[:name]
+      unless is_type? resource[:type] && target
+        raise Puppet::Error, "\"#{fact}\" is not a valid fact"
+      end
+      [resource[resource[:type].to_sym], resource[:type].to_sym]
+    else
+      if resource[:exec]
+        [resource[:exec], :exec]
+      elsif resource[:message]
+        [resource[:message], :message]
+      elsif resource[:ruby]
+        [resource[:ruby], :ruby]
+      else
+        fact = resource[:fact] || resource[:name]
+        [fact, :fact] if fact_or_die? fact
+      end
+    end
+  end
 end
