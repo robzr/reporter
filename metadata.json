@@ -1,6 +1,6 @@
 {
   "name": "robzr-reporter",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Rob Zwissler",
   "license": "MIT",
   "summary": "Simplified recording & extracting of facts, system or ruby commands via Puppet reporting.",

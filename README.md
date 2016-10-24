@@ -130,6 +130,7 @@ reporter {
     exec  => 'last | head -2 | tail -1 | cut -f1 -d\ ';
 }
 ```
+See the tests/init.pp file for more examples.
 
 ## Limitations
 

@@ -53,7 +53,7 @@ Puppet::Type.newtype(:reporter) do
 
   newparam(:type) do
     desc "Type of reporter resource (defaults to fact)"
-    validate { |type| provider.valid_type_or_die? type }
+    validate { |type| provider.type_or_die? type }
   end
 
   newparam(:withpath) do

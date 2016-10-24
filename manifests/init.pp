@@ -9,7 +9,7 @@ class reporter {
 
   Reporter { loglevel => info }
 
-  reporter { 
+  reporter {
     'reporter_message':
       echoonly => true,
       loglevel => notice,
@@ -18,7 +18,7 @@ class reporter {
       exec     => ['sum', '/etc/passwd'];
     'ruby_version':
       ruby     => 'RUBY_VERSION';
-    ['architecture', 'kernel', 'kernelversion', 'memorysize', 'osfamily', 
-     'processorcount', 'puppetversion', 'swapsize', 'virtual']:;
+    ['architecture', 'kernel', 'kernelversion', 'memorysize', 'osfamily',
+      'processorcount', 'puppetversion', 'swapsize', 'virtual']:;
   }
 }

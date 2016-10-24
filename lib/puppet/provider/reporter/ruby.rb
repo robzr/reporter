@@ -5,7 +5,7 @@ Puppet::Type.type(:reporter).provide(:ruby) do
 
   desc 'Universal provider, should work across all POSIX systems.'
 
-  @types = [:exec, :fact, :message, :ruby]
+  TYPES ||= [:exec, :fact, :message, :ruby]
 
   def fact_or_die?(fact)
     if is_fact? fact
@@ -46,7 +46,7 @@ Puppet::Type.type(:reporter).provide(:ruby) do
 
   def type_or_die?(type)
     unless is_type? type.to_sym
-      raise Puppet::Error, "Type must be #{@types.join(', ')}"
+      raise Puppet::Error, "Type must be #{TYPES.join(', ')}"
     end
   end
 
@@ -58,13 +58,13 @@ Puppet::Type.type(:reporter).provide(:ruby) do
 
   def exec_command(command = target)
     if command.is_a? String
-      # TODO: how does this deal with stderr?
+      # TODO: test w/ STDERR
       %x{ #{command} }.chomp
     elsif command.is_a?(Array) && RUBY_VERSION < '1.9.2'
-      # TODO: how does this deal with stderr?
+      # TODO: test w/ STDERR
       IO.popen(command.join(' ')).readlines.join.chomp
     elsif command.is_a? Array
-      # Add in support for env => (?)
+      # TODO: test w/ overriding ENV
       command_array = command + [:err => [:child, :out]]
       IO.popen(command_array).readlines.join.chomp
     end
@@ -81,7 +81,7 @@ Puppet::Type.type(:reporter).provide(:ruby) do
   end
 
   def is_type?(type)
-    @types.include? type.to_sym
+    TYPES.include? type.to_sym
   end
 
   def target
@@ -96,7 +96,7 @@ Puppet::Type.type(:reporter).provide(:ruby) do
     if resource[:type]
       target = resource[resource[:type].to_sym] || resource[:name]
       unless is_type? resource[:type] && target
-        raise Puppet::Error, "\"#{fact}\" is not a valid fact"
+        raise Puppet::Error, "\"#{target}\" is not a valid fact"
       end
       [resource[resource[:type].to_sym], resource[:type].to_sym]
     else
