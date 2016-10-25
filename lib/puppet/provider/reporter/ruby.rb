@@ -5,8 +5,6 @@ Puppet::Type.type(:reporter).provide(:ruby) do
 
   desc 'Universal provider, should work across all POSIX systems.'
 
-  TYPES ||= [:exec, :fact, :message, :ruby]
-
   def fact_or_die?(fact)
     if is_fact? fact
       true
@@ -44,9 +42,13 @@ Puppet::Type.type(:reporter).provide(:ruby) do
     nil
   end
 
+  def types
+    [:exec, :fact, :message, :ruby]
+  end
+
   def type_or_die?(type)
     unless is_type? type.to_sym
-      raise Puppet::Error, "Type must be #{TYPES.join(', ')}"
+      raise Puppet::Error, "Type must be #{types.join(', ')}"
     end
   end
 
@@ -81,7 +83,7 @@ Puppet::Type.type(:reporter).provide(:ruby) do
   end
 
   def is_type?(type)
-    TYPES.include? type.to_sym
+    types.include? type.to_sym
   end
 
   def target
