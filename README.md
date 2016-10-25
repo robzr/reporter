@@ -83,7 +83,7 @@ behavior or reporter is to record a change, which is how the output is recorded.
 - ```fact => 'factname'``` resolves a fact
 - ```message => "Puppet Parsed String"``` records a string, as parsed by Puppet
 - ```ruby => '"StRiNg".downcase'``` runs arbitrary ruby commands
-- ```source => 'puppet:///modules/reporter/file.sh'``` runs executable (not yet implemented)
+- TODO: ```source => 'puppet:///modules/reporter/file.sh'``` downloads and runs executable
 
 A few additional parameters are supplied in order to alter the behavior:
 

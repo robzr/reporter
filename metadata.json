@@ -1,8 +1,8 @@
 {
   "name": "robzr-reporter",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Rob Zwissler",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "summary": "Simplified recording & extracting of facts, system or ruby commands via Puppet reporting.",
   "source": "https://github.com/robzr/reporter",
   "project_page": "https://github.com/robzr/reporter",
